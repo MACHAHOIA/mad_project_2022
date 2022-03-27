@@ -79,21 +79,14 @@ public class JsonHandlerThread extends Thread {
                 for (int i = 0; i < contacts.length(); i++) {
                     JSONObject c = contacts.getJSONObject(i);
 
-                    String id = c.getString("id");
-                    String name = c.getString("name");
-                    String email = c.getString("email");
-                    String address = c.getString("address");
-                    String gender = c.getString("gender");
-
-                    // Phonee node is JSON Object
-                    JSONObject phone = c.getJSONObject("phone");
-                    String mobile = phone.getString("mobile");
-                    String home = phone.getString("home");
-                    String office = phone.getString("office");
+                    String id = c.getString("A");
+                    String name = c.getString("D");
+                    String address = c.getString("F");
+                    String mobile = c.getString("Z");
 
 
                     // Add contact (name, email, address) to contact list
-                    SchoolInfo.addContact(name, email, address, mobile);
+                    SchoolInfo.addContact(name, address, mobile);
                 }
             } catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());
