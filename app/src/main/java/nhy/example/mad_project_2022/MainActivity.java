@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 SchoolInfo.schoolList,
                 R.layout.list_view_layout,
-                new String[] { SchoolInfo.NAME, SchoolInfo.WEBSITE, SchoolInfo.ADDRESS },
-                new int[] { R.id.name, R.id.website, R.id.address }
+                new String[] { SchoolInfo.NAME, SchoolInfo.DISTRICT, SchoolInfo.ADDRESS },
+                new int[] { R.id.name, R.id.district, R.id.address }
         );
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(

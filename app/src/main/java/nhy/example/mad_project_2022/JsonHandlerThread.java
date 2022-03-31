@@ -73,17 +73,18 @@ public class JsonHandlerThread extends Thread {
                 JSONArray array = new JSONArray(schoolStr);
 
                 // looping through All Contacts
-                for (int i = 0; i < array.length(); i++) {
+                for (int i = 1; i < array.length(); i++) {
                     JSONObject c = array.getJSONObject(i);
 
                     String name = c.getString("D");
                     String address = c.getString("F");
                     String mobile = c.getString("Z");
                     String website = c.getString("AD");
+                    String district = c.getString("T");
 
 
                     // Add contact (name, email, address) to contact list
-                    SchoolInfo.addSchool(name, address, mobile,website);
+                    SchoolInfo.addSchool(name, address, mobile,website,district);
                 }
             } catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());

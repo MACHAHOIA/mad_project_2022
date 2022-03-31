@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "mad_project_2022"
+rootProject.name = "School_information_system"
