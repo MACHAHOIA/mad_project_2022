@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 SchoolInfo.schoolList,
                 R.layout.list_view_layout,
-                new String[] { SchoolInfo.NAME, SchoolInfo.ADDRESS },
-                new int[] { R.id.name, R.id.email, R.id.address }
+                new String[] { SchoolInfo.NAME, SchoolInfo.WEBSITE, SchoolInfo.ADDRESS },
+                new int[] { R.id.name, R.id.website, R.id.address }
         );
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         HashMap<String, String> contact = SchoolInfo.schoolList.get(position);
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle(contact.get(SchoolInfo.NAME));
-                        builder.setMessage("Mobile: " + contact.get(SchoolInfo.MOBILE));
+                        builder.setMessage("Website: " + contact.get(SchoolInfo.WEBSITE));
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }

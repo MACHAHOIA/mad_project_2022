@@ -19,7 +19,7 @@ import java.net.URL;
 public class JsonHandlerThread extends Thread {
     private static final String TAG = "JsonHandlerThread";
     // URL to get contacts JSON file
-    private static String jsonUrl = "http://www.edb.gov.hk/attachment/en/student-parents/sch-info/sch-search/sch-location-info/SCH_LOC_EDB.json";
+    private static String jsonUrl = "https://www.edb.gov.hk/attachment/en/student-parents/sch-info/sch-search/sch-location-info/SCH_LOC_EDB.json";
 
     public static String makeRequest() {
         String response = null;
@@ -65,28 +65,25 @@ public class JsonHandlerThread extends Thread {
     }
 
     public void run() {
-        String contactStr = makeRequest();
-        Log.e(TAG, "Response from url: " + contactStr);
+        String schoolStr = makeRequest();
+        Log.e(TAG, "Response from url: " + schoolStr);
 
-        if (contactStr != null) {
+        if (schoolStr != null) {
             try {
-                JSONObject jsonObj = new JSONObject(contactStr);
-
-                // Getting JSON Array node
-                JSONArray contacts = jsonObj.getJSONArray("contacts");
+                JSONArray array = new JSONArray(schoolStr);
 
                 // looping through All Contacts
-                for (int i = 0; i < contacts.length(); i++) {
-                    JSONObject c = contacts.getJSONObject(i);
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject c = array.getJSONObject(i);
 
-                    String id = c.getString("A");
                     String name = c.getString("D");
                     String address = c.getString("F");
                     String mobile = c.getString("Z");
+                    String website = c.getString("AD");
 
 
                     // Add contact (name, email, address) to contact list
-                    SchoolInfo.addContact(name, address, mobile);
+                    SchoolInfo.addSchool(name, address, mobile,website);
                 }
             } catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());
