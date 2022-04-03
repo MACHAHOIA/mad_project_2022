@@ -3,17 +3,25 @@ package nhy.example.mad_project_2022;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private ListView listView;
+    SimpleAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        SimpleAdapter adapter = new SimpleAdapter(
+        adapter = new SimpleAdapter(
                 this,
                 SchoolInfo.schoolList,
                 R.layout.list_view_layout,
@@ -48,5 +56,34 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-    }
+        }
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.search_menu, menu);
+
+            MenuItem searchMenuItem = menu.findItem(R.id.app_bar_search);
+            SearchView searchView = (SearchView) searchMenuItem.getActionView();
+;
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    if(SchoolInfo.schoolList.contains(query)){
+                        adapter.getFilter().filter(query);
+                    }else{
+                        Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+                    }
+                    return false;
+
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    adapter.getFilter().filter(newText);
+                    return false;
+                }
+            });
+            return super.onCreateOptionsMenu(menu);
+        }
 }
+
