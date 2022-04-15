@@ -20,7 +20,13 @@
         android:textColor="#03DAC5" />
 
     <TextView
-        android:id="@+id/address"
+        android:id="@+id/level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#888888" />
+
+    <TextView
+        android:id="@+id/gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#888888" />

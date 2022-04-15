@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 SchoolInfo.schoolList,
                 R.layout.list_view_layout,
-                new String[] { SchoolInfo.NAME, SchoolInfo.DISTRICT, SchoolInfo.ADDRESS },
-                new int[] { R.id.name, R.id.district, R.id.address }
+                new String[] { SchoolInfo.NAME,SchoolInfo.DISTRICT, SchoolInfo.LEVEL, SchoolInfo.GENDER },
+                new int[] { R.id.name,R.id.district ,R.id.level, R.id.gender }
         );
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(
@@ -49,7 +50,21 @@ public class MainActivity extends AppCompatActivity {
                         HashMap<String, String> contact = SchoolInfo.schoolList.get(position);
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle(contact.get(SchoolInfo.NAME));
-                        builder.setMessage("Website: " + contact.get(SchoolInfo.WEBSITE));
+                        builder.setMessage("Mobile: "+ contact.get(SchoolInfo.MOBILE) + "\nAddress: " + contact.get(SchoolInfo.ADDRESS));
+                        builder.setPositiveButton("Back",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }});
+                        builder.setNegativeButton("Search",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                        }});
+                        builder.setNegativeButtonIcon(getDrawable(R.drawable.ic_baseline_map_24));
+
+
+
+
+
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }

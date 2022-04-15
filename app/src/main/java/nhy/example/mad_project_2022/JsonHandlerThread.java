@@ -81,10 +81,11 @@ public class JsonHandlerThread extends Thread {
                     String mobile = c.getString("Z");
                     String website = c.getString("AD");
                     String district = c.getString("T");
-
+                    String gender = c.getString("P");
+                    String level = c.getString("X");
 
                     // Add contact (name, email, address) to contact list
-                    SchoolInfo.addSchool(name, address, mobile,website,district);
+                    SchoolInfo.addSchool(name, address, mobile,website,district,gender,level);
                 }
             } catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());
