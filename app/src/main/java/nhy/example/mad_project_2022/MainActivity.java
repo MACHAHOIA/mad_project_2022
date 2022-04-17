@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setBackgroundDrawableResource(R.drawable.bglogo);
         setContentView(R.layout.activity_main);
 
         if (!checkPermission()) {
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    listView = (ListView) findViewById(R.id.listview);
+    listView =  findViewById(R.id.listview);
         JsonHandlerThread jsonHandlerThread = new JsonHandlerThread();
         jsonHandlerThread.start();
         try {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        HashMap<String, String> contact = SchoolInfo.schoolList.get(position);
+                        HashMap<String, String> contact = (HashMap<String, String>) adapter.getItem(position);
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle(contact.get(SchoolInfo.NAME));
                         builder.setMessage("Mobile: "+ contact.get(SchoolInfo.MOBILE) + "\nAddress: " + contact.get(SchoolInfo.ADDRESS));
@@ -149,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     adapter.getFilter().filter(newText);
-                    return false;
+                    adapter.notifyDataSetChanged();
+                    return true;
                 }
             });
             return super.onCreateOptionsMenu(menu);
