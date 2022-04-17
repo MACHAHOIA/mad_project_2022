@@ -17,12 +17,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                         HashMap<String, String> contact = SchoolInfo.schoolList.get(position);
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setTitle(contact.get(SchoolInfo.NAME));
